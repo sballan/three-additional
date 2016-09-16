@@ -1,34 +1,50 @@
 /**
  * @author mrdoob / http://mrdoob.com/
+ * @edited sballan
  */
 
-THREE.SpriteCanvasMaterial = function ( parameters ) {
+let Material;
 
-	THREE.Material.call( this );
+export class SpriteCanvasMaterial {
+constructor(THREE, parameters) {
+Material = THREE.Material;
+		
+class _SpriteCanvasMaterial extends Material {
+		type : string = 'SpriteCanvasMaterial';
+		color : new THREE.Color(0xffffff);
+		
+		constructor(parameters) {
+			super(parameters);
+			this.setValues(parameters);
+		}
+		
+		program(context, color){};
+		
+		clone() {	
+			var material = new _SpriteCanvasMaterial(); // TODO find out about the parameters
 
-	this.type = 'SpriteCanvasMaterial';
+			material.copy( this );
+			material.color.copy( this.color );
+			material.program = this.program;
 
-	this.color = new THREE.Color( 0xffffff );
-	this.program = function ( context, color ) {};
+			return material;		
+		}
+		
+		
+		
+}}
+return _SpriteCanvasMaterial;
+}
 
-	this.setValues( parameters );
+export class CanvasRenderer { constructor( parameters ) {
 
-};
+class _CanvasRenderer {
 
-THREE.SpriteCanvasMaterial.prototype = Object.create( THREE.Material.prototype );
-THREE.SpriteCanvasMaterial.prototype.constructor = THREE.SpriteCanvasMaterial;
 
-THREE.SpriteCanvasMaterial.prototype.clone = function () {
 
-	var material = new THREE.SpriteCanvasMaterial();
+} 
 
-	material.copy( this );
-	material.color.copy( this.color );
-	material.program = this.program;
-
-	return material;
-
-};
+return _CanvasRenderer; }}
 
 //
 
