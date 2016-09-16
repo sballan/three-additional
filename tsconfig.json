@@ -1,0 +1,8 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"sourceMap": true,
+		"outDir": "three-extended/js"
+	},
+	"compileOnSave": true
+}
