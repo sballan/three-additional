@@ -1,9 +1,5 @@
 "use strict";
-var three_extended_1 = require('./three-extended');
-function threeExtended() {
-    console.log("Started");
-    return three_extended_1.default;
-}
+const three_extended_1 = require('./three-extended');
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = threeExtended;
+exports.default = three_extended_1.default;
 //# sourceMappingURL=index.js.map

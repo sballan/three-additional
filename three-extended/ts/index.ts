@@ -1,6 +1,3 @@
-import threeExtended from './three-extended';
+import ThreeExtended from './three-extended';
 
-export default function threeExtended() {
-	console.log("Started")
-	return threeExtended;
-}
+export default ThreeExtended;

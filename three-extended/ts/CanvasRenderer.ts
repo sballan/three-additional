@@ -3,48 +3,122 @@
  * @edited sballan
  */
 
-let Material;
+import { Material, Color, Box2, Vector3, Matrix3 } from 'three';
 
-export class SpriteCanvasMaterial {
-constructor(THREE, parameters) {
-Material = THREE.Material;
-		
+
 class _SpriteCanvasMaterial extends Material {
-		type : string = 'SpriteCanvasMaterial';
-		color : new THREE.Color(0xffffff);
-		
-		constructor(parameters) {
-			super(parameters);
-			this.setValues(parameters);
-		}
-		
-		program(context, color){};
-		
-		clone() {	
-			var material = new _SpriteCanvasMaterial(); // TODO find out about the parameters
+	type: string = 'SpriteCanvasMaterial';
+	color: Color = new Color(0xffffff);
 
-			material.copy( this );
-			material.color.copy( this.color );
-			material.program = this.program;
+	constructor(parameters: any = {}) {
+		super();
+		this.setValues(parameters);
+	}
 
-			return material;		
-		}
-		
-		
-		
-}}
-return _SpriteCanvasMaterial;
+	program(context, color) { };
+
+	clone() {
+		var material = new _SpriteCanvasMaterial(); // TODO find out about the parameters
+
+		material.copy(this);
+		material.color.copy(this.color);
+		material.program = this.program;
+
+		return material;
+	}
+
 }
 
-export class CanvasRenderer { constructor( parameters ) {
+export class Canvas implements CanvasRenderer {
+	private element: any;
+	private renderData: any;
+	private elements: any;
+	private lights: any;
+	private pixelRatio: number = 1;
+	private context: any;
 
-class _CanvasRenderer {
+
+	private clearColor: Color = new Color(0x000000);
+	private clearAlpha: number;
+
+	private contextGlobalAlpha: number = 1;
+	private contextGlobalCompositeOperation: number = 0;
+	private contextStrokeStyle = null;
+	private contextFillStyle = null;
+	private contextLineWidth = null;
+	private contextLineCap = null;
+	private contextLineJoin = null;
+	private contextLineDash = [];
+	private camera;
+
+	private color: Color = new Color();
+	private color1: Color = new Color();
+	private color2: Color = new Color();
+	private color3: Color = new Color();
+	private color4: Color = new Color();
+
+	private diffuseColor = new Color();
+	private emissiveColor = new Color();
+
+	private lightColor = new Color();
+
+	private clipBox: Box2 = new Box2()
+	private clearBox: Box2 = new Box2()
+	private elemBox: Box2 = new Box2()
+
+	private ambientLight: Color = new Color()
+	private directionalLights: Color = new Color()
+	private pointLights: Color = new Color()
+
+	private vector3: Vector3 = new Vector3() // Needed for PointLight
+	private centroid: Vector3 = new Vector3()
+	private normal: Vector3 = new Vector3()
+	private normalViewMatrix: Matrix3 = new Matrix3();
+	private projector: any = new THREE.Projector()
+
+	private v5:any = new THREE.RenderableVertex()
+	private v6:any  = new THREE.RenderableVertex()
 
 
+	width: number;
+	height: number;
+	widthHalf: number;
+	heightHalf: number;
 
-} 
+	viewportX: number = 0;
+	viewportY: number = 0;
+	viewportWidth: number = this.width
+	viewportHeight: number = this.height
+	
 
-return _CanvasRenderer; }}
+
+	constructor(element: any = document.createElement( 'canvas' ), alpha: boolean = true) {
+		this.element = element 
+
+		this.width = this.element.width;
+		this.height = element.height;
+		this.widthHalf = Math.floor(this.width / 2);
+		this.heightHalf = Math.floor(this.height / 2);
+
+		this.context = this.element.getContext('2d', alpha); // Check on alpha argument
+
+		this.clearAlpha = alpha === true ? 0 : 1;
+
+			if ( this.context.setLineDash === undefined ) {
+				this.context.setLineDash = function () {};
+			}
+	}
+};
+
+export interface CanvasRenderer { 
+	v1; v2; v3; v4;
+	v1x; v1y; v2x; v2y; v3x; v3y; v4x; v4y; v5x; v5y; v6x; v6y;
+	
+	patterns; // = {}?
+	image; uvs;
+	
+	uv1x; uv1y; uv2x; uv2y; uv3x; uv3y;
+}
 
 //
 

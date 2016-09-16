@@ -1,6 +1,10 @@
 "use strict";
+const THREE = require('three');
+class ThreeExtended {
+    constructor() {
+        this.THREE = THREE;
+    }
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = {
-    hi: '34'
-};
+exports.default = ThreeExtended;
 //# sourceMappingURL=three-extended.js.map
